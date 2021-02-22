@@ -1,7 +1,4 @@
 digraph {
-	Outlook -> 88
-	Outlook -> 79
-	Outlook -> 56
-	Outlook -> 66
-	Outlook -> 78
+	Windy -> moreThan75
+	Windy -> lessThan75
 }

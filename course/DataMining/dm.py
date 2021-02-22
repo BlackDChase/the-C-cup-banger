@@ -44,7 +44,7 @@ def suppress_stdout():
 class Node:
     def __init__(self):
         self.value = None
-        self.child = None
+        self.child = []
         self.next = None
 
 class DecisionTree:
@@ -91,6 +91,7 @@ class DecisionTree:
                     df.loc[i,k] = data[k][i]
                 except:
                     print(k,"'s size is less then max size of ",maxNValues)
+        print(df.head())
         try:
             self.x = np.array(df.drop(self.target,axis=1).copy())
         except KeyError:
@@ -213,6 +214,7 @@ class ID3(DecisionTree):
         best_feature_name, best_feature_id = self._get_feature_max_information_gain(x_ids, feature_ids)
         node.value = best_feature_name
         node.child = []
+        #self.view.node(node)
         # value of the chosen feature for each instance
         feature_values = list(set([self.x[x][best_feature_id] for x in x_ids]))
         # loop through all the values
@@ -220,7 +222,7 @@ class ID3(DecisionTree):
             child = Node()
             child.value = value  # add a branch from the node to each feature value in our feature
             node.child.append(child)  # append new child node to current node
-            self.view.edge(node.value,child.value)
+            #self.view.edge(node.value,child.value)
             child_x_ids = [x for x in x_ids if self.x[x][best_feature_id] == value]
             if not child_x_ids:
                 child.next = max(set(labels_in_features), key=labels_in_features.count)
@@ -233,9 +235,20 @@ class ID3(DecisionTree):
                 child.next = self._id3_recv(child_x_ids, feature_ids, child.next)
         return node
 
+    def showTree(self):
+        nodes = [self.node]
+        while len(nodes)>0:
+            current = nodes.pop(0)
+            print("Next : ",current.next)
+            for i in current.child:
+                self.view.edge(current.value,i.value)
+                nodes.append(i)
+                print("Next-> : ",current.next)
+        #self.view.view(filename="output.png")
+
     def printTree(self):
         with suppress_stdout():
-            self.view.view(filename="output.png")
+            self.showTree()
         if not self.node:
             return
         nodes = deque()

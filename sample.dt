@@ -1,0 +1,6 @@
+Outlook: Sunny, Sunny, Sunny, Sunny,Overcast,Overcast,Overcast,Rain,Rain,Rain
+Temp: moreThan70,lessThan70,moreThan70,lessThan70,moreThan70,lessThan70,moreThan70,moreThan70,lessThan70,lessThan70   
+Humidity: moreThan75,lessThan75,lessThan75,moreThan75,moreThan75,lessThan75,moreThan75,lessThan75,lessThan75,lessThan75
+Windy: t,f,t,t,f,t,f,f,f,t
+Class: n,y,y,n,n,y,y,y,n,n
+Class
