@@ -14,7 +14,9 @@ import math
 import pandas as pd
 import numpy as np
 from collections import deque
-import sys
+import sys, os
+import graphviz
+from contextlib import contextmanager
 
 # From Libraries
 """
@@ -25,6 +27,20 @@ Here Class/methods made using libarary functions
 """
 Here Class/methods made from scratch
 """
+
+"""
+To suppress output for tree image
+"""
+@contextmanager
+def suppress_stdout():
+    with open(os.devnull, "w") as devnull:
+        old_stdout = sys.stdout
+        sys.stdout = devnull
+        try:
+            yield
+        finally:
+            sys.stdout = old_stdout
+
 class Node:
     def __init__(self):
         self.value = None
@@ -47,8 +63,9 @@ class DecisionTree:
         __________
         :param target= string, key of target label
         #"""
-        self.target=target
+        self.target = target
         self.massageData(data)
+        self.view = graphviz.Digraph()
         pass
 
     def massageData(self,data):
@@ -203,6 +220,7 @@ class ID3(DecisionTree):
             child = Node()
             child.value = value  # add a branch from the node to each feature value in our feature
             node.child.append(child)  # append new child node to current node
+            self.view.edge(node.value,child.value)
             child_x_ids = [x for x in x_ids if self.x[x][best_feature_id] == value]
             if not child_x_ids:
                 child.next = max(set(labels_in_features), key=labels_in_features.count)
@@ -216,6 +234,8 @@ class ID3(DecisionTree):
         return node
 
     def printTree(self):
+        with suppress_stdout():
+            self.view.view(filename="output.png")
         if not self.node:
             return
         nodes = deque()
