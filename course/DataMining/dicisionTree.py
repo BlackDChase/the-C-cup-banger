@@ -46,14 +46,14 @@ class DecisionTree:
         #"""
         self.target = target
         self.massageData(data)
-        self.view = graphviz.Digraph()
+        self.tree = graphviz.Digraph()
         pass
 
     def massageData(self,data):
         """
         Converting it into pd and then back for future csv dataset
         Parameters
-        Makes x,labels,labelCategories,labelCategoriesCount,feature,featureName
+        Makes x,labels,labelCategories,labelCategoriesCount,feature,featureNames
         __________
         :param data: dict, same as init data
         __________
@@ -87,7 +87,7 @@ class ID3(DecisionTree):
     def __init__(self,data,target):
         DecisionTree.__init__(self,data,target)
         self.node = None
-        self.entropy = self.getEntropy(self.df,self.featureNames)
+        self.getEntropy()
         pass
 
     def getEntropy(self,df,featureNames):
@@ -100,8 +100,11 @@ class ID3(DecisionTree):
         for k in entropy.keys():
             print(k,":",entropy[k])
         return entropy
-    pass
 
+    def informationGain(self,df,featureNames,entropy):
+        
+    def start(self):
+    pass
 
 data={
     "Outlook"   :   ["Sunny","Sunny","Overcast","Rain","Rain"],
