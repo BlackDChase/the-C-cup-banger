@@ -1,0 +1,9 @@
+Index,Column1,Column2,Column3,Column4,Target
+0,40>,Fast,High,Good,Yes
+1,40>,Slow,Low,Good,Yes
+2,40>,Slow,Low,Bad,No
+3,>40,Fast,High,Bad,No
+4,>40,Fast,Low,Bad,Yes
+5,>40,SLow,High,Good,No
+6,>40,Fast,High,Good,No
+7,40>,Fast,Low,Bad,No
