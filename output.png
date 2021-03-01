@@ -1,4 +1,0 @@
-digraph {
-	Windy -> moreThan75
-	Windy -> lessThan75
-}
