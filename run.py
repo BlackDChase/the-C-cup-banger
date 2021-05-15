@@ -1,4 +1,4 @@
-from course.DataMining.dm import ID3
+from course.DataMiningAndWarehousing.DecisionTree import ID3
 import sys
 
 def questionID3():
